@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.commands.Autos.BlueSourceSide;
 import frc.robot.commands.Autos.Fire;
+import frc.robot.commands.Autos.OneNote;
 import frc.robot.commands.Autos.RedSourceSide;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
@@ -33,6 +35,8 @@ public class AutonLoader {
 
         m_chooser.addOption("Fire 1.5", new Fire(1.5));
         m_chooser.addOption("Red Source Side", new RedSourceSide(driveBase));
+        m_chooser.addOption("One Note", new OneNote(driveBase));
+        m_chooser.addOption("Blue Source Side", new BlueSourceSide(driveBase));
 
         SmartDashboard.putData(m_chooser);
         SmartDashboard.updateValues();
