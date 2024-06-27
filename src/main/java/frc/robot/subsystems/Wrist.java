@@ -60,8 +60,9 @@ public class Wrist extends SubsystemBase {
   public double setWristDeg(double degrees) {
     // double flatRot = 0.16484375;
     // double inputRot = (degrees/360.0);
-    double inputRot = (67-degrees)/360.0;
     // return flatRot - inputRot;
+    double inputRot = (67-degrees)/360.0;
+    
     return inputRot;
   }
 

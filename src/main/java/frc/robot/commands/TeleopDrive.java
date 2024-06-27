@@ -5,7 +5,9 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 // import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -49,6 +51,7 @@ public class TeleopDrive extends Command {
   private final Wrist m_wrist;
   private final PhotonSubsystem m_photonsubsystem;
   private final LightsControl m_lightscontrol;
+  private final Climber m_climber;
   AprilTagFieldLayout aprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
 
   
@@ -65,7 +68,7 @@ public class TeleopDrive extends Command {
 
   double manipulatorPosition = 0;
 
-  public TeleopDrive(DriveBase driveBase, Intake intake, Shooter shooter, Wrist wrist, PhotonSubsystem photonsubsystem, LightsControl lightscontrol) {
+  public TeleopDrive(DriveBase driveBase, Intake intake, Shooter shooter, Wrist wrist, PhotonSubsystem photonsubsystem, LightsControl lightscontrol, Climber climber) {
     m_driveBase = driveBase;
     // m_elevator = elevator;
     m_intake = intake;
@@ -73,6 +76,7 @@ public class TeleopDrive extends Command {
     m_wrist = wrist;
     m_photonsubsystem = photonsubsystem;
     m_lightscontrol = lightscontrol;
+    m_climber = climber;
 
     // m_driveBase.resetOdometry(new Pose2d(1.5, 5.5, new Rotation2d()));
     // m_driveBase.resetOdometry(new Pose2d(15.5, 5.5, Rotation2d.fromDegrees(180)));
@@ -108,6 +112,7 @@ public class TeleopDrive extends Command {
 
     m_shooter.setShooterIntake(RobotContainer.getShooterIntakeSpeed() + RobotContainer.getShooterIntakeReverseSpeed());
 
+    m_climber.setClimberPower(RobotContainer.getElevatorLeftJoystick());
     
     wristPos += -RobotContainer.getWristRightJoystick() * 0.01;
     wristPos =MathUtil.clamp(wristPos, 0, 0.2);
@@ -126,12 +131,16 @@ public class TeleopDrive extends Command {
       wristPos = 0.0300;
       m_shooter.setShooterSpinPower(-0.40, -0.09);
     }
-
-    if(RobotContainer.getManipulatorXBool()) { //photon shoot
-      wristPos = m_wrist.setWristDeg(m_photonsubsystem.getOptimalAngle());
-      SmartDashboard.putNumber("Ideal Deg Wrist", m_photonsubsystem.getOptimalAngle());
+    if (RobotContainer.getManipulatorRightBumperBool()) {
+      wristPos = 0.06;
+      m_shooter.setShooterPower(-0.75);
     }
-    // m_lightscontrol.setLed(4);
+
+    // if(RobotContainer.getManipulatorXBool()) { //photon shoot
+    //   wristPos = m_wrist.setWristDeg(m_photonsubsystem.getOptimalAngle());
+    //   SmartDashboard.putNumber("Ideal Deg Wrist", m_photonsubsystem.getOptimalAngle());
+    // }
+    m_lightscontrol.setLed(3);
 
     timer += 1;
 

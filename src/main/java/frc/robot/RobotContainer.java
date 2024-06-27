@@ -25,6 +25,7 @@ import frc.robot.commands.AutonLoader;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.commands.AutoControllers.SimpleLinear;
 import frc.robot.subsystems.Bezier;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Kinematics;
@@ -53,9 +54,10 @@ public class RobotContainer {
   public static PhotonSubsystem photonsubsystem = new PhotonSubsystem();
   public static Bezier bezier = new Bezier();
   private static final LightsControl lightscontrol = new LightsControl();
+  private static Climber climber = new Climber();
 
   public static AutonLoader autonLoader = new AutonLoader(driveBase, intake, photonsubsystem); //NEEDED SUBSYSTEMS FOR AUTON, ELEVATOR NOT USED
-  public static TeleopDrive teleopDrive = new TeleopDrive(driveBase, intake, shooter, wrist, photonsubsystem, lightscontrol); //ALL SUBSYSTEMS
+  public static TeleopDrive teleopDrive = new TeleopDrive(driveBase, intake, shooter, wrist, photonsubsystem, lightscontrol, climber); //ALL SUBSYSTEMS
   private final static CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverPort);
   private final static CommandXboxController m_manipulatorController = new CommandXboxController(OperatorConstants.kManipulatorPort);
 
