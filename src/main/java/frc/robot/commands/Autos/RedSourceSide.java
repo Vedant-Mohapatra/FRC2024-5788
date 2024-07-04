@@ -7,6 +7,8 @@ package frc.robot.commands.Autos;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.CustomNamedCommands;
 import frc.robot.RobotContainer;
 import frc.robot.commands.AutoControllers.FollowBezier;
 import frc.robot.subsystems.DriveBase;
@@ -21,7 +23,7 @@ public class RedSourceSide extends SequentialCommandGroup {
   public RedSourceSide(DriveBase driveBase) {
     // Add your commands in the addCommands() call, e.g.
     Pose2d startpose = RobotContainer.WPI_to_Custom(new Pose2d(15.8, 4.5, Rotation2d.fromDegrees(-135)));
-    Pose2d midfield = RobotContainer.WPI_to_Custom(new Pose2d(12, 0.75, Rotation2d.fromDegrees(180)));
+    Pose2d midfield = RobotContainer.WPI_to_Custom(new Pose2d(8, 0.75, Rotation2d.fromDegrees(180)));
     Pose2d endpose = RobotContainer.WPI_to_Custom(new Pose2d(15.8, 4.5, Rotation2d.fromDegrees(-135)));
 
     Pose2d[] toMidFieldPath = A_Star.nodeListToPosesWPI(A_Star.compute(new Node(startpose.getTranslation(), false), new Node(midfield.getTranslation(), false)), Rotation2d.fromDegrees(-135));
@@ -34,6 +36,8 @@ public class RedSourceSide extends SequentialCommandGroup {
     FollowBezier toStartFromMid = new FollowBezier(driveBase, toStartFromMidPath, 500, false);
     addCommands(
       new Fire(1.5),
+      new WaitCommand(13),
+      CustomNamedCommands.getCommand("IntakeOn"),
       toMidField,
       toStartFromMid
       );

@@ -112,7 +112,7 @@ public class TeleopDrive extends Command {
 
     m_shooter.setShooterIntake(RobotContainer.getShooterIntakeSpeed() + RobotContainer.getShooterIntakeReverseSpeed());
 
-    m_climber.setClimberPower(RobotContainer.getElevatorLeftJoystick());
+    m_climber.setClimberPower(RobotContainer.getManipulatorLeftJoyY());
     
     wristPos += -RobotContainer.getWristRightJoystick() * 0.01;
     wristPos =MathUtil.clamp(wristPos, 0, 0.2);

@@ -53,8 +53,9 @@ public class RobotContainer {
   public static Wrist wrist = new Wrist();
   public static PhotonSubsystem photonsubsystem = new PhotonSubsystem();
   public static Bezier bezier = new Bezier();
-  private static final LightsControl lightscontrol = new LightsControl();
   private static Climber climber = new Climber();
+  private static final LightsControl lightscontrol = new LightsControl();
+
 
   public static AutonLoader autonLoader = new AutonLoader(driveBase, intake, photonsubsystem); //NEEDED SUBSYSTEMS FOR AUTON, ELEVATOR NOT USED
   public static TeleopDrive teleopDrive = new TeleopDrive(driveBase, intake, shooter, wrist, photonsubsystem, lightscontrol, climber); //ALL SUBSYSTEMS
@@ -77,7 +78,7 @@ public class RobotContainer {
     CustomNamedCommands.registerCommand("IntakeOn", intake.IntakeDaNote(0.75).withTimeout(0.1)); 
     CustomNamedCommands.registerCommand("IntakeOff", intake.IntakeDaNote(0.0).withTimeout(0.1)); 
     CustomNamedCommands.registerCommand("HandoffWrist", wrist.AngleDaWrist(0.0523).withTimeout(0.1));
-    CustomNamedCommands.registerCommand("ShootWrist", wrist.AngleDaWrist(0.0238).withTimeout(0.1));
+    CustomNamedCommands.registerCommand("ShootWrist", wrist.AngleDaWrist(0.026).withTimeout(0.1));
     CustomNamedCommands.registerCommand("ShooterOn", shooter.ShootDaNote(-0.75).withTimeout(0.1));
     CustomNamedCommands.registerCommand("ShooterOff", shooter.ShootDaNote(0.0).withTimeout(0.1));
     CustomNamedCommands.registerCommand("IndexOn", shooter.IndexDaNote(-0.2).withTimeout(0.1));
